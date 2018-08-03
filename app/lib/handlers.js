@@ -26,11 +26,11 @@ handlers._hello.post = function(data, callback) {
   if (name) {
     // See if there's a special greeting for this day
     const specialGreeting = helpers.getSpecialGreeting(Date.now());
-
     const greeting = specialGreeting ? specialGreeting : 'Hello';
-    callback(200, { greeting: greeting + ' ' + name + '!' });
+
+    callback(200, { greeting: greeting + ', ' + name + '!' });
   } else {
-    callback(400, { Error: 'Not going to tell me your name, eh?' });
+    callback(400, { Error: 'You didn\'t tell me your name' });
   }
 };
 
