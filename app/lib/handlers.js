@@ -2,6 +2,9 @@
  * Handlers for snarky-hello
  */
 
+// Dependencies
+const helpers = require('./helpers');
+
 const handlers = {};
 
 handlers.hello = function(data, callback) {
@@ -21,7 +24,11 @@ handlers._hello.post = function(data, callback) {
   const name = data.payload.name ? data.payload.name : false;
 
   if (name) {
-    callback(200, { greeting: 'Hello ' + name + '!' });
+    // See if there's a special greeting for this day
+    const specialGreeting = helpers.getSpecialGreeting(Date.now());
+
+    const greeting = specialGreeting ? specialGreeting : 'Hello';
+    callback(200, { greeting: greeting + ' ' + name + '!' });
   } else {
     callback(400, { Error: 'Not going to tell me your name, eh?' });
   }

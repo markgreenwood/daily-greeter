@@ -7,17 +7,7 @@ const http = require('http');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 
-const helpers = {};
-
-helpers.parseJsonToObject = function(str) {
-  try {
-    const obj = JSON.parse(str);
-    return obj;
-  } catch (e) {
-    return {};
-  }
-};
-
+const helpers = require('./lib/helpers');
 const handlers = require('./lib/handlers');
 
 const server = http.createServer((req, res) => {
