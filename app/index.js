@@ -7,6 +7,19 @@ const http = require('http');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 
+const helpers = {};
+
+helpers.parseJsonToObject = function(str) {
+  try {
+    const obj = JSON.parse(str);
+    return obj;
+  } catch (e) {
+    return {};
+  }
+};
+
+const handlers = require('./lib/handlers');
+
 const server = http.createServer((req, res) => {
   // Process the request
   const parsedUrl = url.parse(req.url, true);
@@ -30,6 +43,8 @@ const server = http.createServer((req, res) => {
   req.on('end', () => {
     buffer += decoder.end();
 
+    console.log(JSON.parse(buffer));
+
     const chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
     const data = {
@@ -39,6 +54,8 @@ const server = http.createServer((req, res) => {
       headers,
       payload: helpers.parseJsonToObject(buffer)
     };
+
+    console.log(data);
 
     chosenHandler(data, (statusCode, payload) => {
       statusCode = typeof(statusCode) === 'number' ? statusCode : 404;
@@ -65,20 +82,7 @@ const router = {
   ping: (data, callback) => {
     callback(200);
   },
-  hello: (data, callback) => {
-    callback(200, { message: 'Hello' });
-  }
-};
-
-const helpers = {};
-
-helpers.parseJsonToObject = function(str) {
-  try {
-    const obj = JSON.parse(obj);
-    return obj;
-  } catch (e) {
-    return {};
-  }
+  hello: handlers.hello
 };
 
 server.listen(3000, () => { console.log('Listening on port 3000'); });
