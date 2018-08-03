@@ -9,11 +9,9 @@ helpers.parseJsonToObject = function(str) {
   }
 };
 
-helpers.getSpecialGreeting = function(theDate) {
+helpers.getGreeting = function(theDate) {
   const month = new Date(theDate).getMonth();
   const date = new Date(theDate).getDate();
-
-  console.log('Checking month=', month, ' date=', date);
 
   // May 4 - May the Fourth be with you
   if (month === 4 && date === 4) {
@@ -30,10 +28,7 @@ helpers.getSpecialGreeting = function(theDate) {
     return 'Happy Pi Day';
   }
 
-  if (month === 7 && date === 3) {
-    return 'It was ' + new Date(theDate).toString() + ' a day like any other day';
-  }
-  return null;
+  return 'Happy ' + ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date(theDate).getDay()];
 }
 
 module.exports = helpers;
