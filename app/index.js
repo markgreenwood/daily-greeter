@@ -33,9 +33,7 @@ const server = http.createServer((req, res) => {
   req.on('end', () => {
     buffer += decoder.end();
 
-    console.log(JSON.parse(buffer));
-
-    const chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+    const selectedHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
     const data = {
       trimmedPath,
@@ -45,9 +43,7 @@ const server = http.createServer((req, res) => {
       payload: helpers.parseJsonToObject(buffer)
     };
 
-    console.log(data);
-
-    chosenHandler(data, (statusCode, payload) => {
+    selectedHandler(data, (statusCode, payload) => {
       statusCode = typeof(statusCode) === 'number' ? statusCode : 404;
       payload = typeof(payload) === 'object' ? payload : {};
 

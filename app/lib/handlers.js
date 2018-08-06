@@ -8,7 +8,7 @@ const helpers = require('./helpers');
 const handlers = {};
 
 handlers.hello = function(data, callback) {
-  const acceptableMethods = ['post', 'get'];
+  const acceptableMethods = ['post'];
   if (acceptableMethods.indexOf(data.method) > -1) {
     handlers._hello[data.method](data, callback);
   } else {
@@ -26,12 +26,16 @@ handlers._hello.post = function(data, callback) {
 
   if (name) {
     // See if there's a special greeting for this day
-    const greeting = helpers.getGreeting(Date.now());
+    const greeting = helpers.getGreeting(name, Date.now());
 
     callback(200, { greeting: greeting + ', ' + name + '!' + moreStuff });
   } else {
     callback(400, { Error: 'Bad request' });
   }
+};
+
+handlers.notFound = function(data, callback) {
+  callback(404);
 };
 
 module.exports = handlers;

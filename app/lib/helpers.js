@@ -9,9 +9,14 @@ helpers.parseJsonToObject = function(str) {
   }
 };
 
-helpers.getGreeting = function(theDate) {
+helpers.getGreeting = function(theName, theDate) {
   const month = new Date(theDate).getMonth();
   const date = new Date(theDate).getDate();
+
+  // Luke - could it be the next Jedi?
+  if (theName === 'Luke') {
+    return 'Luke? Hmmm. The force is strong with your family';
+  }
 
   // May 4 - May the Fourth be with you
   if (month === 4 && date === 4) {
