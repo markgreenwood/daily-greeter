@@ -4,14 +4,12 @@
 
 This API is HW #1 for The Node.js Master Class.
 
-I don't know what this is going to do yet.
-
 ## Usage
 
+If you POST to `/hello` with your name in the payload, you'll get a customized / personalized greeting, maybe even holiday wishes if it'a an important day.
 ```
 POST /hello
 {
     name: 'Phil'
 }
 ```
-...get a personalized greeting in return.
