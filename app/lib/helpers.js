@@ -1,6 +1,6 @@
 const helpers = {};
 
-helpers.parseJsonToObject = function(str) {
+helpers.parseJsonToObject = (str) => {
   try {
     const obj = JSON.parse(str);
     return obj;
@@ -9,7 +9,7 @@ helpers.parseJsonToObject = function(str) {
   }
 };
 
-helpers.getGreeting = function(theName, theDate) {
+helpers.getGreeting = (theName, theDate) => {
   const month = new Date(theDate).getMonth();
   const date = new Date(theDate).getDate();
 
