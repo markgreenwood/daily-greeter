@@ -1,5 +1,5 @@
 /*
- * snarky-hello: Returns a personalized greeting if you provide a name
+ * daily-greeter: Returns a personalized greeting if you provide a name
  */
 
 // Dependencies

@@ -1,4 +1,4 @@
-# snarky-hello
+# daily-greeter
 
 ## Purpose
 
